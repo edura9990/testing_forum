@@ -1,1 +1,278 @@
-test
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI 360 Teaching Forum • Asset Showcase</title>
+  <style>
+    :root{
+      --fiu-blue:#081E3F; /* primary */
+      --fiu-gold:#B6862C; /* accent */
+      --ink:#0b1220;
+      --muted:#5f6b85;
+      --bg:#f7f8fb;
+      --card:#ffffff;
+      --ring: rgba(182,134,44,.35);
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial,sans-serif;
+      color:var(--ink); background:linear-gradient(180deg,#fff 0,var(--bg) 100%);
+    }
+    /* Topbar */
+    header{
+      position:sticky; top:0; z-index:50;
+      background:var(--fiu-blue); color:#fff; box-shadow:0 6px 20px rgba(8,30,63,.25);
+    }
+    .wrap{max-width:1100px; margin:0 auto; padding:0 1rem}
+    .topbar{display:flex; align-items:center; gap:.85rem; padding:1rem 0}
+    .brand{display:flex; align-items:center; gap:.75rem; font-weight:800; letter-spacing:.3px}
+    .brand .mark{width:36px; height:36px; border-radius:10px; background:linear-gradient(135deg,var(--fiu-gold),#e6bd6f); display:grid; place-items:center; color:var(--fiu-blue); font-weight:900}
+    nav{margin-left:auto; display:flex; gap:1rem; flex-wrap:wrap}
+    nav a{color:#fff; text-decoration:none; opacity:.9; padding:.35rem .6rem; border-radius:.5rem; transition:opacity .2s, background .2s}
+    nav a:hover{opacity:1; background:rgba(255,255,255,.08)}
+
+    /* Hero */
+    .hero{padding:3.2rem 0 1.2rem 0; text-align:center; color:var(--fiu-blue)}
+    .kicker{color:var(--muted); font-size:.95rem; letter-spacing:.12em; text-transform:uppercase}
+    h1{margin:.35rem 0 .6rem; font-size:clamp(1.8rem,1.2rem+2.5vw,3rem); line-height:1.05}
+    .lead{margin:0 auto; max-width:750px; color:#2a3550}
+
+    /* Controls */
+    .controls{display:grid; grid-template-columns:1fr 220px; gap:.8rem; margin:1.4rem auto 0; max-width:850px}
+    .search, .select{position:relative}
+    input[type="search"], select{
+      width:100%; padding:.85rem 1rem; border-radius:.8rem; border:1.5px solid #d9deea; background:#fff;
+      outline:none; box-shadow:0 6px 20px rgba(8,30,63,.04);
+      transition:border-color .2s, box-shadow .2s
+    }
+    input[type="search"]:focus, select:focus{border-color:var(--fiu-gold); box-shadow:0 0 0 6px var(--ring)}
+
+    /* Grid */
+    .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1.1rem; padding:2rem 0}
+    .card{
+      background:var(--card); border:1px solid #e6eaf3; border-radius:1rem; overflow:hidden;
+      box-shadow:0 12px 30px rgba(8,30,63,.06); transition:transform .18s ease, box-shadow .18s ease, border-color .2s;
+    }
+    .card:hover{transform:translateY(-4px); box-shadow:0 16px 36px rgba(8,30,63,.12); border-color:#d8deec}
+    .thumb{height:140px; background:
+      radial-gradient(60% 60% at 20% 20%, rgba(182,134,44,.35), transparent 60%),
+      radial-gradient(80% 80% at 90% 0%, rgba(8,30,63,.15), transparent 50%),
+      linear-gradient(140deg, #fdf6e7, #eef2fa);
+      position:relative}
+    .badge{position:absolute; top:.7rem; left:.7rem; background:var(--fiu-blue); color:#fff; padding:.25rem .55rem; border-radius:.5rem; font-size:.75rem}
+    .content{padding:1rem}
+    .title{font-weight:700; font-size:1.05rem; margin:0 0 .4rem 0}
+    .meta{font-size:.85rem; color:var(--muted); display:flex; gap:.6rem; flex-wrap:wrap}
+    .actions{display:flex; gap:.5rem; margin-top:1rem}
+    .btn{appearance:none; border:1.5px solid var(--fiu-blue); color:var(--fiu-blue); background:#fff; padding:.55rem .8rem; border-radius:.7rem; font-weight:600; cursor:pointer}
+    .btn.primary{background:var(--fiu-blue); color:#fff; border-color:transparent}
+    .btn.gold{background:var(--fiu-gold); color:#102042; border-color:transparent}
+    .btn:focus{outline: none; box-shadow:0 0 0 6px var(--ring)}
+
+    /* Sections */
+    section{padding:0 0 2rem}
+    .wrap.narrow{max-width:900px}
+
+    /* Footer */
+    footer{border-top:1px solid #e3e7f0; background:#fff; color:#24314c}
+    .foot{display:grid; grid-template-columns:1.5fr 1fr; gap:1rem; padding:1.5rem 0}
+    .small{color:var(--muted); font-size:.9rem}
+    .tag{display:inline-flex; align-items:center; gap:.4rem; padding:.25rem .5rem; background:#f1f3f8; border-radius:.5rem; font-size:.8rem; color:#33415c}
+
+    /* Utility */
+    .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
+    .section-title{display:flex; align-items:center; gap:.6rem; color:var(--fiu-blue)}
+    .section-title::before{content:""; width:22px; height:22px; border-radius:6px; background:linear-gradient(135deg,var(--fiu-gold),#e6bd6f)}
+
+    /* Responsive tweaks */
+    @media (max-width:720px){
+      .controls{grid-template-columns:1fr}
+      .foot{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap topbar" role="navigation" aria-label="Primary">
+      <div class="brand" aria-label="AI 360 Teaching Forum">
+        <div class="mark" aria-hidden="true">AI</div>
+        <div>
+          <div style="font-size:.78rem; opacity:.8; text-transform:uppercase; letter-spacing:.12em">FIU College of Business</div>
+          <div style="font-size:1.05rem; font-weight:800">AI 360 Teaching Forum</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#assets">Assets</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap narrow">
+        <div class="kicker">Curated resources</div>
+        <h1>AI 360 Teaching Forum Asset Showcase</h1>
+        <p class="lead">Browse slides, agendas, handouts, rubrics, and templates used across our AI‑enabled teaching events. Filter by type, download what you need, and remix for your course.</p>
+        <div class="controls" role="search">
+          <label class="search">
+            <span class="sr-only">Search assets</span>
+            <input id="q" type="search" placeholder="Search titles, tags, or descriptions…" aria-label="Search assets" />
+          </label>
+          <label class="select">
+            <span class="sr-only">Filter by type</span>
+            <select id="type">
+              <option value="all">All types</option>
+              <option>Slides</option>
+              <option>Agenda</option>
+              <option>Rubric</option>
+              <option>Template</option>
+              <option>Worksheet</option>
+              <option>Guide</option>
+            </select>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <section id="assets">
+      <div class="wrap grid" id="grid" aria-live="polite"></div>
+    </section>
+
+    <section id="about">
+      <div class="wrap narrow">
+        <h2 class="section-title">About this library</h2>
+        <p style="margin:.6rem 0 0">This site aggregates share‑ready files from the AI 360 Teaching Forum. Unless noted otherwise, materials are licensed for educational reuse with attribution to the original author(s). Replace any placeholder links below with your real files.</p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap narrow">
+        <h2 class="section-title">Contact</h2>
+        <p style="margin:.6rem 0 0">Questions or contributions? Email the organizers or submit a pull request to your internal repo. You can also add items directly by editing the <span class="tag">assets[]</span> list in this file.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <div>
+        <strong>AI 360 Teaching Forum</strong>
+        <div class="small">FIU colors, modern UI, accessible markup. Built as a single‑file starter — you can drop this onto any static host.</div>
+      </div>
+      <div class="small" style="text-align:right">© <span id="year"></span> Florida International University • College of Business</div>
+    </div>
+  </footer>
+
+  <script>
+    // --- Data: Replace with your real asset links/metadata ---
+    const assets = [
+      {
+        title: "Kickoff Slides (Nov 21, 2025)",
+        type: "Slides",
+        desc: "Opening deck covering agenda, table rotations, and norms for AI‑enabled teaching.",
+        tags: ["slides","opening","ai pedagogy"],
+        updated: "2025-10-20",
+        preview: "", // optional image thumb url
+        links: { view: "#", download: "#" }
+      },
+      {
+        title: "Breakout Table Guide: Online Learning & AI",
+        type: "Guide",
+        desc: "Prompt list and discussion starters for facilitators at the Online Learning table.",
+        tags: ["guide","facilitation","online"],
+        updated: "2025-10-18",
+        preview: "",
+        links: { view: "#", download: "#" }
+      },
+      {
+        title: "Agenda (3 Rotations + Open Networking)",
+        type: "Agenda",
+        desc: "Timed schedule with three rotations, followed by open discussion and networking.",
+        tags: ["agenda","schedule"],
+        updated: "2025-10-16",
+        preview: "",
+        links: { view: "#", download: "#" }
+      },
+      {
+        title: "Assignment Template: Generative AI Policy",
+        type: "Template",
+        desc: "Copy‑ready assignment shell including ethical use and disclosure language.",
+        tags: ["template","policy","assignment"],
+        updated: "2025-10-10",
+        preview: "",
+        links: { view: "#", download: "#" }
+      },
+      {
+        title: "Rubric: Smart Cities Proposal (SDG‑Aligned)",
+        type: "Rubric",
+        desc: "Single‑point rubric with criteria for clarity, evidence, and SDG mapping.",
+        tags: ["rubric","assessment","sdg"],
+        updated: "2025-10-08",
+        preview: "",
+        links: { view: "#", download: "#" }
+      },
+      {
+        title: "Worksheet: BPMN Quick‑Start",
+        type: "Worksheet",
+        desc: "One‑page reference with examples of tasks, gateways, and events.",
+        tags: ["bpmn","worksheet","process"],
+        updated: "2025-09-30",
+        preview: "",
+        links: { view: "#", download: "#" }
+      }
+    ];
+
+    const grid = document.getElementById('grid');
+    const q = document.getElementById('q');
+    const typeSel = document.getElementById('type');
+
+    const toDate = (s)=> new Date(s||0);
+
+    function render(items){
+      grid.innerHTML = items.sort((a,b)=> toDate(b.updated)-toDate(a.updated)).map(item=>{
+        const tagStr = item.tags.map(t=>`<span class="tag">${t}</span>`).join(' ');
+        return `
+          <article class="card" data-type="${item.type}" data-title="${item.title.toLowerCase()}" data-tags="${item.tags.join(' ').toLowerCase()}">
+            <div class="thumb">
+              <span class="badge">${item.type}</span>
+            </div>
+            <div class="content">
+              <h3 class="title">${item.title}</h3>
+              <div class="meta">
+                <span title="Last updated">Updated: ${new Date(item.updated).toLocaleDateString()}</span>
+              </div>
+              <p style="margin:.6rem 0 0">${item.desc}</p>
+              <div style="margin:.75rem 0 0; display:flex; gap:.35rem; flex-wrap:wrap">${tagStr}</div>
+              <div class="actions">
+                <a class="btn primary" href="${item.links.view}" target="_blank" rel="noopener">View</a>
+                <a class="btn gold" href="${item.links.download}" target="_blank" rel="noopener" download>Download</a>
+              </div>
+            </div>
+          </article>`
+      }).join('');
+    }
+
+    function filter(){
+      const needle = (q.value||'').trim().toLowerCase();
+      const type = typeSel.value;
+      const items = assets.filter(a=>{
+        const hay = `${a.title} ${a.desc} ${a.tags.join(' ')}`.toLowerCase();
+        const hit = !needle || hay.includes(needle);
+        const typeOk = type==='all' || a.type===type;
+        return hit && typeOk;
+      });
+      render(items);
+    }
+
+    q.addEventListener('input', filter);
+    typeSel.addEventListener('change', filter);
+
+    render(assets);
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
